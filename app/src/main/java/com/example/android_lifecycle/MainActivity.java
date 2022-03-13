@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,ShowGuess.class); //show guess class just says,ok give me the class and then i will deal with everything else that need to be
-                startActivity(intent); //we pass the intent there
+                intent.putExtra("guess","Hellow There");  //here guess is the key and value is "Hellow There"
+                startActivity(intent); //we pass the (String->"Hellow There") intent to ShowGuess.java
             }
         });
     }
