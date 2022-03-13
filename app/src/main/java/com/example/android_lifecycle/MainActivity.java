@@ -3,23 +3,36 @@ package com.example.android_lifecycle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
+   private Button showGuess;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        showGuess = findViewById(R.id.guess_button);
+
+        showGuess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,ShowGuess.class); //show guess class just says,ok give me the class and then i will deal with everything else that need to be
+                startActivity(intent); //we pass the intent there
+            }
+        });
     }
 
 
-
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -55,6 +68,6 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         Log.d("Cycle","onDestroy");
         Toast.makeText(MainActivity.this,"onDestroy() Called",Toast.LENGTH_SHORT).show();
-    }
+    }*/
 
 }

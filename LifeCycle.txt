@@ -1,0 +1,11 @@
+
+
+ D/Cycle: onStart  //When Application Start
+ D/Cycle: onResume //When Application Screning and working
+
+
+ D/Cycle: onPause  //When Back the application 
+ D/Cycle: onStop   //stop the application
+ D/Cycle: onDestroy //fully stop the application 
+
+ after that again when i start the application the it's start form onStart() gradually.
