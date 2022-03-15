@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
    private Button showGuess;
+   private EditText enterGuess;
 
 
     @Override
@@ -21,13 +23,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         showGuess = findViewById(R.id.guess_button);
+        enterGuess = findViewById(R.id.Guess_field);
 
         showGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ShowGuess.class); //show guess class just says,ok give me the class and then i will deal with everything else that need to be
-                intent.putExtra("guess","Hellow There");  //here guess is the key and value is "Hellow There"
-                startActivity(intent); //we pass the (String->"Hellow There") intent to ShowGuess.java
+
+                String guess = enterGuess.getText().toString().trim();  //data input nebo enterGuess theke(Guess_field)
+
+                if(!guess.isEmpty())
+                {
+                    Intent intent = new Intent(MainActivity.this,ShowGuess.class); //show guess class just says,ok give me the class and then i will deal with everything else that need to be
+
+                    intent.putExtra("guess",guess);  //here guess is the key and value is guess
+
+                    intent.putExtra("Games","bond");
+                    intent.putExtra("age",34);
+                    startActivity(intent); //we pass the (String->"Hellow There") intent to ShowGuess.java
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Enter Guess",Toast.LENGTH_SHORT).show();
+                }
+
+
+
             }
         });
     }
