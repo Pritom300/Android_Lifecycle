@@ -1,5 +1,6 @@
 package com.example.android_lifecycle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -15,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
 
    private Button showGuess;
    private EditText enterGuess;
+   private final int REQUEST_CODE=2;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         showGuess = findViewById(R.id.guess_button);
         enterGuess = findViewById(R.id.Guess_field);
@@ -39,7 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
                     intent.putExtra("Games","bond");
                     intent.putExtra("age",34);
-                    startActivity(intent); //we pass the (String->"Hellow There") intent to ShowGuess.java
+                    //startActivity(intent); //we pass the (String->"Hellow There") intent to ShowGuess.java
+                    startActivityForResult(intent,REQUEST_CODE); //if something happened,to receive something inside of our own activity result(created "onActivityResult" in this class)
+
+
+
                 }
                 else{
                     Toast.makeText(MainActivity.this,"Enter Guess",Toast.LENGTH_SHORT).show();
@@ -51,43 +58,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-/*
+  //we also have a resultCode parameter.this gonnabe this(ShowGuess.java { setResult(RESULT_OK,intent); }) and this means,
+    //ok!everything is good to be passed back to that activity (onActivityResult)
     @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("Cycle","onStart");
-        Toast.makeText(MainActivity.this,"onStart() Called",Toast.LENGTH_SHORT).show();
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==REQUEST_CODE)
+        {
+            String message = data.getStringExtra("Message_Back");
+            Toast.makeText(MainActivity.this,message,Toast.LENGTH_SHORT).show();
+        }
     }
-
-    @Override
-    protected void onResume() {  //onResume and onPostResume is same
-        super.onResume();
-
-        Log.d("Cycle","onResume");
-        Toast.makeText(MainActivity.this,"onResume() Called",Toast.LENGTH_SHORT).show();
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("Cycle","onPause");
-        Toast.makeText(MainActivity.this,"onPause() Called",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("Cycle","onStop");
-        Toast.makeText(MainActivity.this,"onStop() Called",Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("Cycle","onDestroy");
-        Toast.makeText(MainActivity.this,"onDestroy() Called",Toast.LENGTH_SHORT).show();
-    }*/
-
 }

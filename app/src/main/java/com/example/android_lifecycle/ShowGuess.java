@@ -2,8 +2,10 @@ package com.example.android_lifecycle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,21 +31,19 @@ public class ShowGuess extends AppCompatActivity {
 
             showTextGuessview.setText(extra.getString("guess"));
             Log.d("Nme extra","onCreate: " +extra.getInt("age"));
-
-
         }
 
-
-//       String value = getIntent().getStringExtra("guess");  //receieve value from mainactivity via key(guess)
-//
-//        if(value!=null)
-//        {
-//            showTextGuessview.setText(value);  //main activity theke ana string value("Hellow There") showTextGuessview te set hoye jabe
-//        }
-
-
-
-
-
+        showTextGuessview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = getIntent();
+                intent.putExtra("Message_Back","From Second Activity");
+                setResult(RESULT_OK,intent);  //it's actually pass value amader MainActivity te create kora (onActivityResult) te.
+                finish();
+            }
+        });
     }
 }
+
+//eitar output hosse jokon name like guess button e click korbo then notun create kora shoGuess activity er textview e input kora nam visible hobe
+//r tik oi input kora nam er upor click korle abr back chole jabe MainActivity te!! Amaizing,isn't it :)
